@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="holike_app">#ffffff</color>
+    <color name="select_text">#000000</color>
+    <color name="line_color">#a2a2a2</color>
+    <color name="null_color">#00000000</color>
+    <color name="selected_background">#e5e5e5</color>
+    <color name="scanned_item_color">#9BCD9B</color>
+    <color name="text_black">#222222</color>
+    <color name="logout">#3F51B5</color>
+    <color name="logout_selected">#87CEEB</color>
+    <color name="white">#ffffff</color>
+    <color name="new_red">#FF3030</color>
+
+    <color name="color_primary">#3f51b5</color>
+    <color name="color_primaryDark">#303f9f</color>
+    <color name="color_accent">#ff4081</color>
+    <color name="color_while">#ffffff</color>
+    <color name="color_black">#000000</color>
+    <color name="color_orange">#c77514</color>
+    <color name="color_yello">#FFFF00</color>
+    <color name="color_grey">#cccccc</color>
+    <color name="color_red">#d6001d</color>
+    <color name="color_red_pressed">#b40018</color>
+
+    <!--backgroundColor-->
+    <color name="bg_state_bar">#cccccc</color>
+    <color name="bg_booting_top">#f8f8f8f8</color>
+    <color name="bg_setting_item">#ffffff</color>
+    <color name="bg_setting_item_pressed">#bbbbbb</color>
+    <color name="bg_divider">#cccccc</color>
+    <color name="bg_divider2">#eeeeee</color>
+    <color name="bg_transparent">#00000000</color>
+    <color name="bg_gift_exchange">#f0f0f0</color>
+    <color name="bg_tv_overpass_unpart">#777777</color>
+    <color name="bg_tv_overpass_part2">#0000e5</color>
+    <color name="bg_tv_overpass_part3">#ffb000</color>
+    <color name="bg_tv_overpass_part4">#00d900</color>
+    <color name="bg_tv_overpass_part5">#883dff</color>
+    <color name="bg_tv_overpass_part6">#00d9d2</color>
+    <color name="bg_tv_overpass_part7">#ff5043</color>
+    <color name="bg_tv_course_left">#0069ff</color>
+    <color name="bg_tv_course_right">#ff6d00</color>
+    <color name="bg_dialog">#cc000000</color>
+    <color name="bg_toast">#e6000000</color>
+    <color name="bg_item_rv_exam_select">#999999</color>
+    <color name="bg_my_header_default">#7f7f7f</color>
+    <color name="bg_my_header_mask">#80000000</color>
+    <color name="bg_no_network">#ff5f5c</color>
+
+    <!--textColor-->
+    <color name="textColor1">#ffffff</color>
+    <color name="textColor2">#aaaaaa</color>
+    <color name="textColor3">#333333</color>
+    <color name="textColor4">#222222</color>
+    <color name="textColor5">#d6001d</color>
+    <color name="textColor6">#666666</color>
+    <color name="textColor7">#80ffffff</color>
+    <color name="textColor8">#111111</color>
+    <color name="textColor9">#ffb400</color>
+    <color name="textColor10">#bbbbbb</color>
+    <color name="textColor11">#1ed600</color>
+    <color name="textColor12">#ff9600</color>
+    <color name="textColor13">#0069ff</color>
+</resources>

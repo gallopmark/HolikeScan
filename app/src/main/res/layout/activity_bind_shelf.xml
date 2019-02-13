@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.haolaike.hotlikescan.activities.BindShelfActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:background="@color/bg_booting_top"
+        android:gravity="center"
+        android:text="@string/bind_shelf_title"
+        android:textSize="@dimen/textSize_20" />
+
+    <View style="@style/divider_horizontal" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_46"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/bind_shelf_bztm"
+            android:textSize="@dimen/release_info_text_size" />
+
+        <TextView
+            android:id="@+id/tv_bind_shelf_component"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:textColor="@color/textColor5"
+            android:textSize="@dimen/release_info_text_size" />
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+
+    <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
+        android:id="@+id/rv_bind_shelf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_46"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb_bind_shelf_auto"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_btn_grey"
+            android:textSize="@dimen/textSize_14"
+            android:gravity="center|left"
+            android:text="@string/bind_shelf_auto_submit" />
+
+        <View
+            style="@style/divider_vertical"
+            android:background="@color/white" />
+
+        <TextView
+            android:id="@+id/btn_bind_shelf_add"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_btn_grey"
+            android:gravity="center"
+            android:text="@string/bind_shelf_add_shelf"
+            android:textSize="@dimen/textSize_14" />
+
+        <View
+            style="@style/divider_vertical"
+            android:background="@color/white" />
+
+        <TextView
+            android:id="@+id/btn_bind_shelf_rescan"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_btn_grey"
+            android:gravity="center"
+            android:text="@string/bind_shelf_rescan"
+            android:textSize="@dimen/textSize_14" />
+    </LinearLayout>
+</LinearLayout>

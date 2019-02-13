@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.haolaike.hotlikescan.activities.OutActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:background="@color/bg_booting_top"
+        android:gravity="center"
+        android:text="@string/out_title"
+        android:textSize="@dimen/textSize_20" />
+
+    <View style="@style/divider_horizontal" />
+
+    <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
+        android:id="@+id/rv_out"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_weight="1" />
+
+    <View style="@style/divider_horizontal" />
+
+
+    <TextView
+        android:id="@+id/btn_out_all"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:background="@drawable/bg_btn_grey"
+        android:gravity="center"
+        android:padding="@dimen/dp_5"
+        android:text="@string/out_all_out" />
+</LinearLayout>

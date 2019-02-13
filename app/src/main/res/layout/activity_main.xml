@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_divider"
+    tools:context="com.haolaike.hotlikescan.activities.MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:background="@color/bg_booting_top"
+        android:gravity="center"
+        android:text="好莱客扫描"
+        android:textSize="@dimen/textSize_20" />
+
+    <View style="@style/divider_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_180"
+        android:padding="@dimen/dp_20"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/bg_pda">
+
+        <ImageView
+            android:layout_width="@dimen/dp_55"
+            android:layout_height="@dimen/dp_55"
+            android:tint="@color/white"
+            android:src="@drawable/head_portrait" />
+
+        <TextView
+            android:id="@+id/tv_main_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:textSize="@dimen/textSize_16"
+            android:textColor="@color/white"
+            android:text="test003" />
+
+        <TextView
+            android:id="@+id/btn_main_exit"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_10"
+            android:textColor="@color/textColor2"
+            android:text="退出" />
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

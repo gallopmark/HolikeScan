@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/dp_5"
+    android:gravity="center|left"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_item_outwarehouse_bztm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor2"
+            android:layout_marginRight="@dimen/dp_20"
+            android:text="864" />
+
+        <TextView
+            android:id="@+id/tv_item_outwarehouse_orderNo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:textColor="@color/textColor2"
+            android:text="ZS13105702-171213003" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_2"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_item_outwarehouse_packageNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor2"
+            android:layout_marginRight="@dimen/dp_20"
+            android:text="2/3" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center|right"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tv_item_outwarehouse_chlidOrderNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dp_20"
+                android:textColor="@color/textColor2"
+                android:text="000520" />
+            <TextView
+                android:id="@+id/tv_item_outwarehouse_soOrderNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor2"
+                android:text="0330000063" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        style="@style/divider_horizontal"
+        android:layout_marginTop="@dimen/dp_5" />
+</LinearLayout>

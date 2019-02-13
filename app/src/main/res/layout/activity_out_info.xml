@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.haolaike.hotlikescan.activities.OutInfoActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:background="@color/bg_booting_top"
+        android:gravity="center"
+        android:text="@string/outinfo_title"
+        android:textSize="@dimen/textSize_20" />
+
+    <View style="@style/divider_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/release_info_margin_left"
+        android:layout_marginRight="@dimen/release_info_margin_left"
+        android:layout_marginTop="@dimen/release_info_margin_top"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:textSize="@dimen/textSize_16"
+            android:text="@string/outinfo_carrier"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/et_out_info_carrier"
+            style="@style/et_enter"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:textSize="@dimen/textSize_16" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/release_info_margin_left"
+        android:layout_marginRight="@dimen/release_info_margin_left"
+        android:layout_marginTop="@dimen/release_info_margin_top"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:textSize="@dimen/textSize_16"
+            android:text="@string/outinfo_carNum"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/et_out_info_carNum"
+            style="@style/et_enter"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:textSize="@dimen/textSize_16" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/release_info_margin_left"
+        android:layout_marginRight="@dimen/release_info_margin_left"
+        android:layout_marginTop="@dimen/release_info_margin_top"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:textSize="@dimen/textSize_16"
+            android:text="@string/outinfo_releaseWay"
+            android:layout_height="wrap_content" />
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:padding="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:background="@drawable/bg_et_enter"
+            >
+
+            <Spinner
+                android:id="@+id/sp_out_info_releaseWay"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:entries="@array/releaseWay" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/release_info_margin_left"
+        android:layout_marginRight="@dimen/release_info_margin_left"
+        android:layout_marginTop="@dimen/release_info_margin_top"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:textSize="@dimen/textSize_16"
+            android:text="@string/outinfo_loadingCar"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/et_out_info_loadingCar"
+            style="@style/et_enter"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:textSize="@dimen/textSize_16" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_46"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20">
+
+        <TextView
+            android:id="@+id/btn_out_info_clear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:background="@drawable/bg_btn_red"
+            android:textColor="@color/white"
+            android:text="@string/outinfo_clear" />
+
+        <TextView
+            android:id="@+id/btn_out_info_sure"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:background="@drawable/bg_btn_red"
+            android:textColor="@color/white"
+            android:text="@string/outinfo_sure" />
+    </LinearLayout>
+</LinearLayout>

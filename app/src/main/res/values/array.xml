@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="releaseWay">
+        <item>托运</item>
+        <item>快递</item>
+        <item>自提</item>
+        <item>工厂送货</item>
+    </string-array>
+
+    <string-array name="main_item">
+        <item>入库扫描</item>
+        <item>出库扫描</item>
+        <item>指定货架</item>
+        <item>APP信息</item>
+    </string-array>
+</resources>

@@ -1,0 +1,5 @@
+4007770876
+
+
+设备要以PDP方式接入(相机模式)
+https://stackoverflow.com/questions/41775988/what-is-the-reason-for-the-error-device-supports-x86-but-apk-only-supports-arm
