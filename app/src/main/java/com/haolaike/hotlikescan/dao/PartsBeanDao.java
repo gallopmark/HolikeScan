@@ -37,6 +37,7 @@ public class PartsBeanDao extends AbstractDao<PartsBean, Long> {
         public final static Property IsScan = new Property(10, boolean.class, "isScan", false, "IS_SCAN");
         public final static Property Type = new Property(11, int.class, "type", false, "TYPE");
         public final static Property Time = new Property(12, long.class, "time", false, "TIME");
+        public final static Property TargetBztm = new Property(13, String.class, "targetBztm", false, "TARGET_BZTM");
     }
 
 
@@ -64,7 +65,8 @@ public class PartsBeanDao extends AbstractDao<PartsBean, Long> {
                 "\"CHLID_ORDER_NO\" TEXT," + // 9: chlidOrderNo
                 "\"IS_SCAN\" INTEGER NOT NULL ," + // 10: isScan
                 "\"TYPE\" INTEGER NOT NULL ," + // 11: type
-                "\"TIME\" INTEGER NOT NULL );"); // 12: time
+                "\"TIME\" INTEGER NOT NULL ," + // 12: time
+                "\"TARGET_BZTM\" TEXT);"); // 13: targetBztm
     }
 
     /** Drops the underlying database table. */
@@ -129,6 +131,11 @@ public class PartsBeanDao extends AbstractDao<PartsBean, Long> {
         stmt.bindLong(11, entity.getIsScan() ? 1L: 0L);
         stmt.bindLong(12, entity.getType());
         stmt.bindLong(13, entity.getTime());
+ 
+        String targetBztm = entity.getTargetBztm();
+        if (targetBztm != null) {
+            stmt.bindString(14, targetBztm);
+        }
     }
 
     @Override
@@ -187,6 +194,11 @@ public class PartsBeanDao extends AbstractDao<PartsBean, Long> {
         stmt.bindLong(11, entity.getIsScan() ? 1L: 0L);
         stmt.bindLong(12, entity.getType());
         stmt.bindLong(13, entity.getTime());
+ 
+        String targetBztm = entity.getTargetBztm();
+        if (targetBztm != null) {
+            stmt.bindString(14, targetBztm);
+        }
     }
 
     @Override
@@ -209,7 +221,8 @@ public class PartsBeanDao extends AbstractDao<PartsBean, Long> {
             cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // chlidOrderNo
             cursor.getShort(offset + 10) != 0, // isScan
             cursor.getInt(offset + 11), // type
-            cursor.getLong(offset + 12) // time
+            cursor.getLong(offset + 12), // time
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13) // targetBztm
         );
         return entity;
     }
@@ -229,6 +242,7 @@ public class PartsBeanDao extends AbstractDao<PartsBean, Long> {
         entity.setIsScan(cursor.getShort(offset + 10) != 0);
         entity.setType(cursor.getInt(offset + 11));
         entity.setTime(cursor.getLong(offset + 12));
+        entity.setTargetBztm(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
      }
     
     @Override

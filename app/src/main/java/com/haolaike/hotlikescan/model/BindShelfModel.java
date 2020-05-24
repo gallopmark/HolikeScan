@@ -42,13 +42,14 @@ public class BindShelfModel implements BaseModel {
         MyHttpClient.postBody(UrlPath.POST_BINDING_QRCODE + code, jsonParams.toString(), new RequestCallBack<String>() {
             @Override
             public void onFailed(String result) {
-                try {
-                    JSONObject jsonObject = new JSONObject(result);
-                    String reason = jsonObject.getString("reason");
-                    listener.failed(reason);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                listener.failed(result);
+//                try {
+//                    JSONObject jsonObject = new JSONObject(result);
+//                    String reason = jsonObject.getString("reason");
+//                    listener.failed(reason);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
             }
 
             @Override

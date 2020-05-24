@@ -1,12 +1,15 @@
 package com.haolaike.hotlikescan.activities;
 
 import android.content.Context;
+import android.support.v7.widget.SwitchCompat;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.haolaike.hotlikescan.R;
 import com.haolaike.hotlikescan.base.BasePresenter;
 import com.haolaike.hotlikescan.beans.AppVersionBean;
+import com.haolaike.hotlikescan.data.LocalSource;
 import com.haolaike.hotlikescan.dialog.SimpleDialog;
 import com.haolaike.hotlikescan.http.MyHttpClient;
 import com.haolaike.hotlikescan.http.RequestCallBack;
@@ -34,10 +37,16 @@ public class AppVersionActivity extends com.haolaike.hotlikescan.base.BaseActivi
     TextView tvUpdate;
     @BindView(R.id.ll_update)
     LinearLayout llUpdate;
+    @BindView(R.id.switchCompat)
+    SwitchCompat switchCompat;
 
     @Override
     protected void init() {
         tvVersionName.setText(String.format(getString(R.string.appversion_version), AppUtil.GetVersionName(this)));
+        switchCompat.setChecked(LocalSource.isHangup(this));
+        switchCompat.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            LocalSource.saveHangup(AppVersionActivity.this,isChecked);
+        });
     }
 
     @Override
@@ -67,13 +76,14 @@ public class AppVersionActivity extends com.haolaike.hotlikescan.base.BaseActivi
         MyHttpClient.get(UrlPath.URL_CHECK_VERSION, params, new RequestCallBack<AppVersionBean>() {
             @Override
             public void onFailed(String result) {
-                try {
-                    JSONObject jsonObject = new JSONObject(result);
-                    String reason = jsonObject.getString("reason");
-                    ToastUtils.showToast(reason);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                ToastUtils.showToast(result);
+//                try {
+//                    JSONObject jsonObject = new JSONObject(result);
+//                    String reason = jsonObject.getString("reason");
+//                    ToastUtils.showToast(reason);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
             }
 
             @Override

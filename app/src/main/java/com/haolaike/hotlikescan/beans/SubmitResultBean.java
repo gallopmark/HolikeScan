@@ -124,8 +124,8 @@ public class SubmitResultBean {
          */
 
         private String bztm;
-        private long zrkrq;
-        private int zrksj;
+        private String zrkrq;
+        private String zrksj;
         private String zrkczr;
         private String zpm;
         private String vbeln;
@@ -143,19 +143,19 @@ public class SubmitResultBean {
             this.bztm = bztm;
         }
 
-        public long getZrkrq() {
+        public String getZrkrq() {
             return zrkrq;
         }
 
-        public void setZrkrq(long zrkrq) {
+        public void setZrkrq(String zrkrq) {
             this.zrkrq = zrkrq;
         }
 
-        public int getZrksj() {
+        public String getZrksj() {
             return zrksj;
         }
 
-        public void setZrksj(int zrksj) {
+        public void setZrksj(String zrksj) {
             this.zrksj = zrksj;
         }
 

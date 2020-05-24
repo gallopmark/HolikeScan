@@ -1,6 +1,9 @@
 package com.haolaike.hotlikescan.utils;
 
+import android.content.Context;
 import android.content.res.Resources;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 import java.io.Serializable;
 
@@ -41,5 +44,12 @@ public class DensityUtil  {
      */
     public float px2dip(float pxValue) {
         return (pxValue / density);
+    }
+
+    public static int getScreenWidth(Context context) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        return outMetrics.widthPixels;
     }
 }

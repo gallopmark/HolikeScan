@@ -1,5 +1,7 @@
 package com.haolaike.hotlikescan.base;
 
+import android.support.annotation.Nullable;
+
 /**
  * Created by wqj on 2017/10/17.
  * 所有presenter的抽象类
@@ -28,12 +30,9 @@ public abstract class BasePresenter<V extends BaseView, M extends BaseModel> {
         return view != null;
     }
 
+    @Nullable
     public V getView() {
-        if (view == null) {
-            throw new RuntimeException("view not attached");
-        } else {
-            return view;
-        }
+        return view;
     }
 
     protected abstract M getModel();

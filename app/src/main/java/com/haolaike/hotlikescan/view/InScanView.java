@@ -11,16 +11,16 @@ import java.util.List;
  */
 
 public interface InScanView extends BaseView {
-    public void setListData(String code, List<PartsBean> list);
+    void setListData(String code, List<PartsBean> list);
 
-    public void getCodeDataFailed(String failed);
+    void getCodeDataFailed(String failed);
 
-    public void inWareSuccess();
+    void inWareSuccess();
 
-    public void inWareFailed(String failed);
+    void inWareFailed(String failed);
 //    public void inWarePartFailed(String failed);
 
-    public void loading(String text);
+    void loading(String text);
 
-    public void disLoading();
+    void disLoading();
 }

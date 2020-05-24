@@ -8,6 +8,7 @@
 
     <!--未入库列表-->
     <string name="disin_title">未入库列表</string>
+    <string name="disout_title">未出库列表</string>
 
     <!--入库扫描-->
     <string name="inscan_title">入库扫描</string>
@@ -43,6 +44,7 @@
     <string name="outscan_current_scan">当前扫描：</string>
     <string name="outscan_scaned">已经扫描：</string>
     <string name="outscan_out">出库</string>
+    <string name="outscan_unout_list">未出库列表</string>
     <string name="outscan_skip">跳过</string>
     <string name="outscan_in_list">已经在出库列表</string>
     <string name="outscan_different">不同部件</string>
@@ -74,5 +76,11 @@
     <string name="dialog_exit">退出</string>
     <string name="dialog_sure_exit">确定要退出吗？</string>
 
-
+    <string name="dialog_order_noscan_finish">该订单未完成扫描，是否挂起？</string>
+    <string name="dialog_button_hangup">挂起</string>
+    <string name="dialog_button_refuse">拒绝</string>
+    
+    <string name="hangup_tips">挂起提示</string>
+    <string name="confirm">确定</string>
+    <string name="select_date">选择日期：</string>
 </resources>

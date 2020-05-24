@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.haolaike.hotlikescan">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -8,6 +9,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -20,8 +22,11 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:targetApi="n">
         <activity
             android:name=".activities.LoginActivity"
             android:screenOrientation="portrait" />
@@ -34,10 +39,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.InScanActivity" />
+        <activity android:name=".activities.InScan2Activity"/>
         <activity android:name=".activities.OutScanActivity" />
         <activity android:name=".activities.OutActivity" />
         <activity android:name=".activities.OutInfoActivity" />
         <activity android:name=".activities.DisInActivity" />
+        <activity android:name=".activities.DisOutActivity"/>
         <activity android:name=".activities.AppVersionActivity" />
         <activity android:name=".activities.BindShelfActivity" />
     </application>

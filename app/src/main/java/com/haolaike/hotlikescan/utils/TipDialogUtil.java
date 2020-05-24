@@ -1,8 +1,8 @@
 package com.haolaike.hotlikescan.utils;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 
 public class TipDialogUtil {
     public static AlertDialog showConfirm(Activity activity, String title, String confirm) {

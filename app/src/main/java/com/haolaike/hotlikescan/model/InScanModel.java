@@ -1,6 +1,7 @@
 package com.haolaike.hotlikescan.model;
 
-import android.widget.TextView;
+
+import android.text.TextUtils;
 
 import com.haolaike.hotlikescan.base.BaseModel;
 import com.haolaike.hotlikescan.beans.InScanBean;
@@ -11,11 +12,7 @@ import com.haolaike.hotlikescan.http.UrlPath;
 import com.haolaike.hotlikescan.utils.Constants;
 import com.haolaike.hotlikescan.utils.SharedPreferencesUtils;
 
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,9 +24,6 @@ public class InScanModel implements BaseModel {
 
     /**
      * 获取二维码信息
-     *
-     * @param code
-     * @param listener
      */
     public void getCodeData(String code, GetCodeDataListener listener) {
         Map<String, String> params = new HashMap<>();
@@ -55,13 +49,9 @@ public class InScanModel implements BaseModel {
 
     /**
      * 入库
-     *
-     * @param code
-     * @param params
-     * @param listener
      */
     public void inWarehose(String code, String params, InWarehoseListener listener) {
-        MyHttpClient.postBody(UrlPath.POST_STORAGE_QRCODES + code, params, new RequestCallBack<SubmitResultBean>() {
+        MyHttpClient.postBodyByTimeout(UrlPath.POST_STORAGE_QRCODES + code, null, params, 5 * 60, new RequestCallBack<SubmitResultBean>() {
             @Override
             public void onFailed(String result) {
                 listener.failed(result);
@@ -77,7 +67,7 @@ public class InScanModel implements BaseModel {
                 }
                 for (int i = 0; i < result.getGtMessageZj().size(); i++) {
                     SubmitResultBean.GtMessageZjBean bean = result.getGtMessageZj().get(i);
-                    if (!bean.getSubrc().equals("S")) {
+                    if (!TextUtils.equals(bean.getSubrc(), "S")) {
                         builder.append(bean.getMessage()).append(i == result.getGtMessageZj().size() ? "" : "\n");
                         errorCount++;
                     }

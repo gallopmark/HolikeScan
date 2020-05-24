@@ -6,6 +6,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.haolaike.hotlikescan.R;
+import com.haolaike.hotlikescan.base.BaseActivity;
 import com.haolaike.hotlikescan.presenter.LoginPresenter;
 import com.haolaike.hotlikescan.view.LoginView;
 
@@ -17,7 +18,7 @@ import butterknife.OnClick;
  * 管理登录的Activity
  */
 
-public class LoginActivity extends com.haolaike.hotlikescan.base.BaseActivity<LoginPresenter, LoginView> implements LoginView {
+public class LoginActivity extends BaseActivity<LoginPresenter, LoginView> implements LoginView {
     @BindView(R.id.et_login_name)
     EditText etName;
     @BindView(R.id.et_login_password)

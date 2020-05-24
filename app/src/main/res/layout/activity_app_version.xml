@@ -19,17 +19,17 @@
     <View style="@style/divider_horizontal" />
 
     <ImageView
-        android:layout_marginTop="20dp"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginTop="20dp"
         android:scaleType="centerInside"
         android:src="@drawable/new_holike_log" />
 
     <TextView
         android:id="@+id/tv_versionName"
-        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="版本：1.0" />
 
     <View
@@ -45,25 +45,51 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:paddingBottom="15dp"
-            android:paddingTop="15dp"
-            android:paddingLeft="10dp"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_15"
+            android:paddingBottom="@dimen/dp_15"
             android:text="@string/appversion_update"
-            android:textSize="16sp"
-            android:textColor="@color/text_black" />
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/textSize_16" />
 
         <TextView
             android:id="@+id/tv_update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:layout_marginRight="@dimen/dp_10"
             android:background="@color/textColor5"
-            android:layout_marginRight="10dp"
-            android:textSize="10sp"
-            android:padding="3dp"
-            android:text="@string/appversion_new_version" />
+            android:padding="@dimen/dp_3"
+            android:text="@string/appversion_new_version"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize_10" />
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_15"
+            android:paddingBottom="@dimen/dp_15"
+            android:text="@string/hangup_tips"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/textSize_16" />
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/switchCompat"
+            style="@style/SwitchButtonStyle"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/dp_10" />
     </LinearLayout>
 
     <View style="@style/divider_horizontal" />

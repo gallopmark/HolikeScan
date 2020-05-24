@@ -6,16 +6,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.haolaike.hotlikescan.BuildConfig;
 import com.haolaike.hotlikescan.dialog.LoadingDialog;
+import com.haolaike.hotlikescan.http.LogCat;
 import com.haolaike.hotlikescan.utils.Constants;
 
 import java.lang.ref.WeakReference;
@@ -38,7 +43,7 @@ public abstract class BaseActivity<T extends BasePresenter, V extends BaseView> 
         setContentView(setContentViewId());
         ButterKnife.bind(this);
         mPresenter = getPresenter();
-        handler=new MyHandler(this);
+        handler = new MyHandler(this);
         setOrientation();
         if (mPresenter != null && (this instanceof BaseView)) {
             mPresenter.attach((V) this);
@@ -78,7 +83,7 @@ public abstract class BaseActivity<T extends BasePresenter, V extends BaseView> 
         handler.removeCallbacksAndMessages(null);
     }
 
-    protected void startActivity(Class<?> activity) {
+    protected void startActivity(Class<? extends Activity> activity) {
         Intent intent = new Intent(this, activity);
         startActivityForResult(intent, 0);
     }
@@ -91,6 +96,9 @@ public abstract class BaseActivity<T extends BasePresenter, V extends BaseView> 
     }
 
     protected void scanData(String code) {
+        if (!TextUtils.isEmpty(code) && BuildConfig.DEBUG) {
+            LogCat.e("scanData", code);
+        }
     }
 
     /**
@@ -112,20 +120,16 @@ public abstract class BaseActivity<T extends BasePresenter, V extends BaseView> 
     private BroadcastReceiver scanReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(Constants.SCANACTION)) {
+            if (TextUtils.equals(intent.getAction(), Constants.SCANACTION)) {
                 String mCode = intent.getStringExtra(Constants.SCANNERDATA);
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        scanData(mCode.trim());
-                    }
-                }, 1);
+                handler.postDelayed(() -> scanData(mCode.trim()), 1);
             }
         }
     };
 
     static class MyHandler extends Handler {
         WeakReference<Activity> mWeakReference;
+
         public MyHandler(Activity activity) {
             mWeakReference = new WeakReference<>(activity);
         }

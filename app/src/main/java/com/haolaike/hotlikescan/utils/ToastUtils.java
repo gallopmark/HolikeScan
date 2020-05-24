@@ -1,8 +1,10 @@
 package com.haolaike.hotlikescan.utils;
 
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.haolaike.hotlikescan.MyApplication;
+import com.haolaike.hotlikescan.R;
 
 /**
  * Created by wqj on 2017/12/25.
@@ -38,7 +40,7 @@ public class ToastUtils {
             oneTime = System.currentTimeMillis();
         } else {
             twoTime = System.currentTimeMillis();
-            if (message.equals(oldMsg)) {
+            if (TextUtils.equals(message, oldMsg)) {
                 if (twoTime - oneTime > Toast.LENGTH_SHORT) {
                     toast.show();
                 }

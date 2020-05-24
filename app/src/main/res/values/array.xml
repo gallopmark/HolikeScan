@@ -8,6 +8,7 @@
     </string-array>
 
     <string-array name="main_item">
+        <item>萝岗特殊入库扫描</item>
         <item>入库扫描</item>
         <item>出库扫描</item>
         <item>指定货架</item>

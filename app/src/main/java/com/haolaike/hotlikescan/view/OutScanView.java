@@ -11,17 +11,17 @@ import java.util.List;
  */
 
 public interface OutScanView extends BaseView {
-    public void setListData(String code, List<PartsBean> list);
+    void setListData(String code, List<PartsBean> list);
 
-    public void getCodeDataFailed(String failed);
+    void getCodeDataFailed(String failed);
 
-    public void loading(String text);
+    void loading(String text);
 
-    public void disLoading();
+    void disLoading();
 
-    public void scaned();
+    void scaned();
 
-    public void difference();
+    void difference();
 
-    public void scanFinish();
+    void scanFinish();
 }

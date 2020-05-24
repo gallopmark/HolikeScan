@@ -65,4 +65,11 @@
     <color name="textColor11">#1ed600</color>
     <color name="textColor12">#ff9600</color>
     <color name="textColor13">#0069ff</color>
+
+    <color name="textColor21">#CCCCCC</color>
+    <color name="textColor23">#EEEEEE</color>
+
+    <!-- line color -->
+    <color name="lineColor">#30d6001d</color>
+
 </resources>

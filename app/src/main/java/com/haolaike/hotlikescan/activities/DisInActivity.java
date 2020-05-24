@@ -4,14 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.TextView;
 
 import com.haolaike.hotlikescan.R;
+import com.haolaike.hotlikescan.base.BaseActivity;
 import com.haolaike.hotlikescan.base.BasePresenter;
+import com.haolaike.hotlikescan.beans.LocalItem;
+import com.haolaike.hotlikescan.beans.PartsBean;
 import com.haolaike.hotlikescan.data.PartsData;
 import com.haolaike.hotlikescan.utils.DensityUtil;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
@@ -22,6 +23,7 @@ import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import butterknife.BindView;
@@ -29,24 +31,34 @@ import butterknife.BindView;
 /**
  * 未入库列表
  */
-public class DisInActivity extends com.haolaike.hotlikescan.base.BaseActivity {
+public class DisInActivity extends BaseActivity {
     public final static int RESULTCODE_DISIN = 10001;
 
     @BindView(R.id.rv_disin)
     SwipeMenuRecyclerView rv;
 
-    private List<String> list;
+    private List<LocalItem> list;
 
     @Override
     protected void init() {
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setSwipeMenuCreator(mSwipeMenuCreator);
         rv.setSwipeMenuItemClickListener(mMenuItemClickListener);
-        Set<String> keys = PartsData.getInstance().getInMap().keySet();
+        Map<String, List<PartsBean>> mBeanMap = PartsData.getInstance().getInMap();
+        Set<String> keys = mBeanMap.keySet();
         if (keys.size() > 0) {
             list = new ArrayList<>();
             for (String key : keys) {
-                list.add(key);
+                List<PartsBean> list = mBeanMap.get(key);
+                if (list != null && !list.isEmpty()) {
+                    PartsBean bean = list.get(0);
+                    LocalItem item = new LocalItem();
+                    item.bjbz = bean.getBjbz();
+                    item.soOrderNo = bean.getSoOrderNo();
+                    item.childOrderNo = bean.getChlidOrderNo();
+                    item.targetBztm = bean.getTargetBztm();
+                    this.list.add(item);
+                }
             }
             setList(this, rv, list);
         }
@@ -64,30 +76,22 @@ public class DisInActivity extends com.haolaike.hotlikescan.base.BaseActivity {
 
     /**
      * 显示未入库列表
-     *
-     * @param context
-     * @param recyclerView
-     * @param list
      */
-    public void setList(final Context context, RecyclerView recyclerView, List<String> list) {
-        recyclerView.setAdapter(new CommonAdapter<String>(context, R.layout.item_rv_disin, list) {
+    public void setList(final Context context, RecyclerView recyclerView, List<LocalItem> list) {
+        recyclerView.setAdapter(new CommonAdapter<LocalItem>(context, R.layout.item_rv_disin, list) {
             @Override
-            protected void convert(ViewHolder holder, String key, int position) {//key=bean.getBjbz() + "+" + bean.getSoOrderNo() + "+" + bean.getChlidOrderNo();
-                String[] keys = key.split("\\+");
+            protected void convert(ViewHolder holder, final LocalItem item, int position) {//key=bean.getBjbz() + "+" + bean.getSoOrderNo() + "+" + bean.getChlidOrderNo();
                 TextView tvSoOrderNo = holder.getView(R.id.tv_item_disin_soOrderNo);
                 TextView tvBjbz = holder.getView(R.id.tv_item_disin_bjbz);
                 TextView tvChildOrderNo = holder.getView(R.id.tv_item_chlidOrderNo);
-                tvBjbz.setText(keys.length > 0 ? keys[0] : "");
-                tvSoOrderNo.setText(keys.length > 1 ? keys[1] : "");
-                tvChildOrderNo.setText(keys.length > 2 ? (keys[2].equals("null") ? "" : keys[2]) : "");
-                holder.getConvertView().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent();
-                        intent.putExtra("key", key);
-                        setResult(RESULTCODE_DISIN, intent);
-                        finish();
-                    }
+                tvBjbz.setText(item.bjbz);
+                tvSoOrderNo.setText(item.soOrderNo);
+                tvChildOrderNo.setText(item.childOrderNo);
+                holder.getConvertView().setOnClickListener(v -> {
+                    Intent intent = new Intent();
+                    intent.putExtra("key", item.targetBztm);
+                    setResult(RESULTCODE_DISIN, intent);
+                    finish();
                 });
             }
         });
@@ -96,17 +100,14 @@ public class DisInActivity extends com.haolaike.hotlikescan.base.BaseActivity {
     /**
      * 侧滑删除菜单
      */
-    SwipeMenuCreator mSwipeMenuCreator = new SwipeMenuCreator() {
-        @Override
-        public void onCreateMenu(SwipeMenu leftMenu, SwipeMenu rightMenu, int viewType) {
-            SwipeMenuItem deleteItem = new SwipeMenuItem(DisInActivity.this)
-                    .setHeight(DensityUtil.dp2px(50))
-                    .setWidth(DensityUtil.dp2px(50))
-                    .setBackgroundColorResource(R.color.textColor5)
-                    .setTextColorResource(R.color.white)
-                    .setText("删除");
-            rightMenu.addMenuItem(deleteItem);
-        }
+    SwipeMenuCreator mSwipeMenuCreator = (leftMenu, rightMenu, viewType) -> {
+        SwipeMenuItem deleteItem = new SwipeMenuItem(DisInActivity.this)
+                .setHeight(DensityUtil.dp2px(50))
+                .setWidth(DensityUtil.dp2px(50))
+                .setBackgroundColorResource(R.color.textColor5)
+                .setTextColorResource(R.color.white)
+                .setText("删除");
+        rightMenu.addMenuItem(deleteItem);
     };
 
     /**
@@ -117,7 +118,7 @@ public class DisInActivity extends com.haolaike.hotlikescan.base.BaseActivity {
         public void onItemClick(SwipeMenuBridge menuBridge) {
             menuBridge.closeMenu();
             int position = menuBridge.getAdapterPosition();
-            PartsData.getInstance().deleteIn(PartsData.getInstance().getInListByKey(list.get(position)));
+            PartsData.getInstance().deleteIn(PartsData.getInstance().getInListByKey(list.get(position).targetBztm));
             list.remove(position);
             rv.getAdapter().notifyItemRemoved(position);
             rv.getAdapter().notifyItemRangeChanged(position, list.size() - position);

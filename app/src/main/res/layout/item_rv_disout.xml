@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_50"
+    android:background="@drawable/bg_btn_while"
+    android:gravity="center|start"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_item_disout_bjbz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_30"
+            android:text="B12"
+            android:textColor="@color/textColor2" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            tools:ignore="NestedWeights">
+
+            <TextView
+                android:id="@+id/tv_item_disout_soOrderNo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TEST00381"
+                android:textColor="@color/textColor2" />
+
+            <TextView
+                android:id="@+id/tv_item_chlidOrderNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_30"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:text="000520"
+                android:textColor="@color/textColor2" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+</LinearLayout>

@@ -1,5 +1,7 @@
 package com.haolaike.hotlikescan.http;
 
+import android.text.TextUtils;
+
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -20,6 +22,7 @@ public abstract class RequestCallBack<T> implements Observer<String> {
 
     @Override
     public void onSubscribe(@NonNull Disposable d) {
+        cancel();
         disposable = d;
     }
 
@@ -36,7 +39,7 @@ public abstract class RequestCallBack<T> implements Observer<String> {
 
     @Override
     public void onError(@NonNull Throwable e) {
-        onFailed(e.toString());
+        onFailed(ApiException.handleException(e).getMessage());
     }
 
     @Override
@@ -57,12 +60,30 @@ public abstract class RequestCallBack<T> implements Observer<String> {
                     }
                     break;
                 default:
-                    onFailed(s);
+                    String reason = null;
+                    try {
+                        if (json.has("data")) {
+                            JSONObject dataObject = json.getJSONObject("data");
+                            if (dataObject.has("emessage")) {
+                                reason = dataObject.optString("emessage");
+                            }
+                        }
+                    } catch (Exception ignored) {
+                    }
+                    if (TextUtils.isEmpty(reason)) {
+                        try {
+                            reason = json.optString("reason");
+                        } catch (Exception ignored) {
+                        }
+                    }
+                    if (!TextUtils.isEmpty(reason)) {
+                        onFailed(reason);
+                    } else
+                        onFailed(s);
                     break;
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            onFailed(e.getMessage());
+            onFailed(ApiException.handleException(e).getMessage());
         }
     }
 

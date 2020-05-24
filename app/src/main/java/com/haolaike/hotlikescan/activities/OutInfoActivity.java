@@ -1,6 +1,7 @@
 package com.haolaike.hotlikescan.activities;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -42,7 +43,7 @@ public class OutInfoActivity extends com.haolaike.hotlikescan.base.BaseActivity 
     protected void init() {
         releaseWays = getResources().getStringArray(R.array.releaseWay);
         String outInfo = SharedPreferencesUtils.getString(Constants.OUTINFOBEAN, null);
-        int outSize = PartsData.getInstance().getOutInfoMap().keySet().size();
+        int outSize = PartsData.getInstance().getAllScanOutList().size();
         showInfo(new Gson().fromJson(outInfo, OutInfoBean.class));
         if (outSize > 0) {
             new SimpleDialog(this).setDate(getString(R.string.outinfo_dialog_title), getString(R.string.outinfo_dialog_contnet),
@@ -50,16 +51,35 @@ public class OutInfoActivity extends com.haolaike.hotlikescan.base.BaseActivity 
                     .setListener(new SimpleDialog.ClickListener() {
                         @Override
                         public void left() {
-                            PartsData.getInstance().deleteOut(PartsData.getInstance().getAllOutList());
+                            PartsData.getInstance().deleteOut(PartsData.getInstance().getAllScanOutList());
                         }
 
                         @Override
                         public void right() {
-                            startActivity(OutActivity.class);
-                            finish();
+                            hasOutTask();
+//                            startActivity(OutActivity.class);
+//                            finish();
                         }
                     }).show();
         }
+    }
+
+    private void hasOutTask() {
+//        Intent intent = new Intent(this, OutActivity.class);
+//        intent.putExtra(OutActivity.FROM_SCAN, false);
+//        startActivity(intent);
+        startActivity(OutActivity.class);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == OutActivity.RESULTCODE_OUT && data != null) {
+            Intent intent = new Intent(this, OutScanActivity.class);
+            intent.putExtra("key", data.getStringExtra("key"));
+            startActivity(intent);
+        }
+        finish();
     }
 
     @Override

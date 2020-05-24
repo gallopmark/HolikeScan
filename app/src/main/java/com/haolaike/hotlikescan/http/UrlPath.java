@@ -32,4 +32,6 @@ public class UrlPath {
 
     //检查App版本号
     public static final String URL_CHECK_VERSION = HOST + "/warehouse/api/appversion";
+
+    public static final String URL_TEMP = BuildConfig.API_TEMP + "/data/code";
 }

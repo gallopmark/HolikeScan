@@ -66,4 +66,12 @@
         <item name="android:windowFrame">@null</item><!--边框-->
     </style>
 
+    <style name="SwitchButtonStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="switchMinWidth">@dimen/dp_46</item>
+        <item name="android:thumb">@drawable/switch_custom_thumb_selector</item>
+        <item name="track">@drawable/switch_custom_track_selector</item>
+    </style>
 </resources>

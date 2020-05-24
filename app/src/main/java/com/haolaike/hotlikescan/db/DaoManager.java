@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.haolaike.hotlikescan.dao.DaoMaster;
 import com.haolaike.hotlikescan.dao.DaoSession;
+import com.haolaike.hotlikescan.dao.GreenDaoContext;
 
 import org.greenrobot.greendao.query.QueryBuilder;
 
@@ -13,7 +14,6 @@ import org.greenrobot.greendao.query.QueryBuilder;
 
 public class DaoManager {
 
-    private static final String TAG = DaoManager.class.getSimpleName();
     private static final String DB_NAME = "holike.db";
 
     private Context context;
@@ -44,7 +44,7 @@ public class DaoManager {
      */
     public DaoMaster getDaoMaster() {
         if (sDaoMaster == null) {
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(context, DB_NAME, null);
+            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(new GreenDaoContext(context), DB_NAME, null);
             sDaoMaster = new DaoMaster(helper.getWritableDatabase());
         }
         return sDaoMaster;

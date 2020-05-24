@@ -19,33 +19,64 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
-        android:gravity="center|left"
+        android:background="@color/white"
+        android:gravity="center|start"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/dp_10"
-        >
+        android:paddingRight="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/select_date"
+            android:textSize="@dimen/textSize_14" />
+
+        <TextView
+            android:id="@+id/mDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableRight="@drawable/layer_arrow_down"
+            android:gravity="center"
+            android:textSize="@dimen/textSize_14"
+            android:drawableEnd="@drawable/layer_arrow_down" />
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:gravity="center|left"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_10">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/inscan_current_scan" />
+            android:text="@string/inscan_current_scan"
+            android:textSize="@dimen/textSize_14" />
 
         <EditText
             android:id="@+id/tv_inwarehose_sacnCode"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@null"
             android:layout_weight="1"
+            android:background="@null"
             android:imeOptions="actionDone"
-            android:textColor="@color/textColor5" />
+            android:textColor="@color/textColor5"
+            android:textSize="@dimen/textSize_14" />
+
         <TextView
             android:id="@+id/btn_inwarehose_input"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textColor="@color/textColor6"
             android:gravity="center"
             android:paddingLeft="@dimen/dp_10"
             android:paddingRight="@dimen/dp_10"
-            android:text="确定"/>
+            android:text="@string/confirm"
+            android:textColor="@color/textColor6"
+            android:textSize="@dimen/textSize_14" />
 
     </LinearLayout>
 
@@ -54,7 +85,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_inwarehose"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@color/white" />
 

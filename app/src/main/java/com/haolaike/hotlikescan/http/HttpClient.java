@@ -1,5 +1,6 @@
 package com.haolaike.hotlikescan.http;
 
+import com.haolaike.hotlikescan.BuildConfig;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.ArrayList;
@@ -10,15 +11,17 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.EventListener;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  * Created by Administrator on 2017/4/1 0001.
  */
 
 public class HttpClient {
-    public static final String BASE_URL = "http://39.108.84.67:3333";
+    public static final String BASE_URL = BuildConfig.API_HOST;
     private static final int DEFAULT_TIMEOUT = 60;
 
     private OkHttpClient httpClient;
@@ -38,10 +41,13 @@ public class HttpClient {
 
         httpClientBuilder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
         httpClientBuilder.readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+        httpClientBuilder.writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+        httpClientBuilder.callTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+        httpClientBuilder.eventListenerFactory(HttpEventListener.FACTORY);
         httpClient = httpClientBuilder.build();
         callBacks = new ArrayList<>();
 
-        retrofit = new Retrofit.Builder().client(httpClient).addConverterFactory(new StringConverterFactory())
+        retrofit = new Retrofit.Builder().client(httpClient).addConverterFactory(ScalarsConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).baseUrl(BASE_URL).build();
 
     }
@@ -66,15 +72,14 @@ public class HttpClient {
     }
 
     /*get请求方式*/
-    public void get(String url, Map<String, String> header, Map<String, String> params, RequestCallBack callBack) {
+    public void get(String url, Map<String, String> header, Map<String, String> params, RequestCallBack<?> callBack) {
         if (url == null) {
             return;
         }
         GetService service = retrofit.create(GetService.class);
-        Observable<String> call = null;
+        Observable<String> call;
         if (header == null) {
             if (params == null) {
-
                 call = service.get(url);
                 LogCat.v_request("GET url:" + url);
             } else {
@@ -94,7 +99,7 @@ public class HttpClient {
     }
 
     /*post请求方式*/
-    public void post(String url, Map<String, String> header, Map<String, String> params, RequestCallBack callBack) {
+    public void post(String url, Map<String, String> header, Map<String, String> params, RequestCallBack<?> callBack) {
         if (url == null) {
             return;
         }
@@ -122,7 +127,7 @@ public class HttpClient {
     }
 
     /*参数为body*/
-    public void post(String url, Map<String, String> header, String params, RequestCallBack callBack) {
+    public void post(String url, Map<String, String> header, String params, RequestCallBack<?> callBack) {
         if (url == null || params == null) {
             return;
         }
@@ -143,6 +148,37 @@ public class HttpClient {
             call.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(callBack);
     }
 
+    /**
+     * 可设置超时时间请求
+     */
+    void postBodyByTimeout(String url, Map<String, String> header, String params, int timeout, RequestCallBack<?> callBack) {
+        if (url == null || params == null) {
+            return;
+        }
+        OkHttpClient.Builder ob = new OkHttpClient.Builder();
+        ob.readTimeout(timeout, TimeUnit.SECONDS).connectTimeout(timeout, TimeUnit.SECONDS)
+                .callTimeout(timeout, TimeUnit.SECONDS);
+        OkHttpClient client = ob.build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(HttpClient.BASE_URL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .client(client)
+                .build();
+        BodyService service = retrofit.create(BodyService.class);
+        Observable<String> call;
+        LogCat.v_request(url);
+        if (header == null) {
+            call = service.post(url, params);
+            LogCat.v_request("POST url:" + url + "\nparams:" + params);
+        } else {
+            call = service.post(url, header, params);
+            LogCat.v_request("POST url:" + url + "\nheader:" + header.toString() + "\nparams:" + params);
+        }
+        currentCallBack = callBack;
+        callBacks.add(currentCallBack);
+
+        call.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(callBack);
+    }
 //    /*上传文件*/
 //    public void upload(String url, Map<String, String> header, Map<String, String> params, List<MultipartBody.Part> parts, RequestCallBack callBack) {
 //        if (url == null) {
@@ -195,8 +231,6 @@ public class HttpClient {
 
     /**
      * 返回成功移除响应
-     *
-     * @param callBack
      */
     public void remove(RequestCallBack callBack) {
         if (callBacks != null && callBacks.size() > 0) {

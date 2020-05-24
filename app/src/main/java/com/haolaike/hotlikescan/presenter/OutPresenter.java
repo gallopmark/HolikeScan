@@ -1,19 +1,17 @@
 package com.haolaike.hotlikescan.presenter;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.haolaike.hotlikescan.R;
 import com.haolaike.hotlikescan.base.BasePresenter;
 import com.haolaike.hotlikescan.beans.OutInfoBean;
 import com.haolaike.hotlikescan.beans.PartsBean;
-import com.haolaike.hotlikescan.beans.SubmitResultBean;
 import com.haolaike.hotlikescan.model.OutModel;
 import com.haolaike.hotlikescan.utils.Constants;
 import com.haolaike.hotlikescan.utils.DensityUtil;
 import com.haolaike.hotlikescan.utils.SharedPreferencesUtils;
 import com.haolaike.hotlikescan.view.OutView;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuItemClickListener;
@@ -35,6 +33,13 @@ public class OutPresenter extends BasePresenter<OutView, OutModel> {
         return new OutModel();
     }
 
+    private String dateTime;
+
+    public void setDateTime(String source) {
+        dateTime = source;
+//        dateTime = source.replaceAll("-", "");
+    }
+
     /**
      * 出库
      *
@@ -54,6 +59,7 @@ public class OutPresenter extends BasePresenter<OutView, OutModel> {
                     jsonObject.put("zcph", outInfoBean.getZcph());
                     jsonObject.put("zthfs", outInfoBean.getZthfs());
                     jsonObject.put("zzcbz", outInfoBean.getZzcbz());
+                    jsonObject.put("zckrp", TextUtils.isEmpty(dateTime) ? "" : dateTime); //出库日期
                     jsonArray.put(jsonObject);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -69,7 +75,7 @@ public class OutPresenter extends BasePresenter<OutView, OutModel> {
             model.out(list.get(0).getBztm(), json.toString(), new OutModel.OutListener() {
                 @Override
                 public void success(JSONObject result) {
-                    getView().outSuccess();
+                    if (getView() != null) getView().outSuccess();
                 }
 
                 @Override
@@ -81,11 +87,11 @@ public class OutPresenter extends BasePresenter<OutView, OutModel> {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    getView().outFailed(result);
+                    if (getView() != null) getView().outFailed(result);
                 }
             });
         } else {
-            getView().outFailed("没有可以出库列表");
+            if (getView() != null) getView().outFailed("没有可以出库列表");
         }
     }
 
@@ -96,19 +102,15 @@ public class OutPresenter extends BasePresenter<OutView, OutModel> {
      * @return
      */
     public SwipeMenuCreator getSwipeMenuCreator(Context context) {
-        SwipeMenuCreator swipeMenuCreator = new SwipeMenuCreator() {
-            @Override
-            public void onCreateMenu(SwipeMenu leftMenu, SwipeMenu rightMenu, int viewType) {
-                SwipeMenuItem deleteItem = new SwipeMenuItem(context)
-                        .setHeight(DensityUtil.dp2px(50))
-                        .setWidth(DensityUtil.dp2px(50))
-                        .setBackgroundColorResource(R.color.textColor5)
-                        .setTextColorResource(R.color.white)
-                        .setText("删除");
-                rightMenu.addMenuItem(deleteItem);
-            }
+        return (leftMenu, rightMenu, viewType) -> {
+            SwipeMenuItem deleteItem = new SwipeMenuItem(context)
+                    .setHeight(DensityUtil.dp2px(50))
+                    .setWidth(DensityUtil.dp2px(50))
+                    .setBackgroundColorResource(R.color.textColor5)
+                    .setTextColorResource(R.color.white)
+                    .setText("删除");
+            rightMenu.addMenuItem(deleteItem);
         };
-        return swipeMenuCreator;
     }
 
     /**
@@ -117,14 +119,10 @@ public class OutPresenter extends BasePresenter<OutView, OutModel> {
      * @return
      */
     public SwipeMenuItemClickListener getSwipeMenuItemClickListener() {
-        SwipeMenuItemClickListener menuItemClickListener = new SwipeMenuItemClickListener() {
-            @Override
-            public void onItemClick(SwipeMenuBridge menuBridge) {
-                menuBridge.closeMenu();
-                int position = menuBridge.getAdapterPosition();
-                getView().delectItem(position);
-            }
+        return menuBridge -> {
+            menuBridge.closeMenu();
+            int position = menuBridge.getAdapterPosition();
+            if (getView() != null) getView().delectItem(position);
         };
-        return menuItemClickListener;
     }
 }

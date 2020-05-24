@@ -38,16 +38,16 @@ public class BindShelfPresenter extends BasePresenter<BindShelfView, BindShelfMo
      * @param shelfCodes
      */
     public void bindShelf(String code, List<String> shelfCodes) {
-        getView().loading("正在绑定...");
+        if (getView() != null) getView().loading("正在绑定...");
         model.bindShelf(code, shelfCodes, new BindShelfModel.BindShelfListener() {
             @Override
             public void success(String result) {
-                getView().BindShelSuccess(result);
+                if (getView() != null) getView().BindShelSuccess(result);
             }
 
             @Override
             public void failed(String result) {
-                getView().BindShelFailed(result);
+                if (getView() != null) getView().BindShelFailed(result);
             }
         });
     }
@@ -85,7 +85,7 @@ public class BindShelfPresenter extends BasePresenter<BindShelfView, BindShelfMo
             public void onItemClick(SwipeMenuBridge menuBridge) {
                 menuBridge.closeMenu();
                 int position = menuBridge.getAdapterPosition();
-                getView().delectItem(position);
+                if (getView() != null) getView().delectItem(position);
             }
         };
         return menuItemClickListener;
@@ -116,13 +116,12 @@ public class BindShelfPresenter extends BasePresenter<BindShelfView, BindShelfMo
         timer = new CountDownTimer(s * 1000, 100) {
             @Override
             public void onTick(long millisUntilFinished) {
-                // TODO Auto-generated method stub
                 ToastUtils.showToast(millisUntilFinished / 1000 + "秒后自动绑定!");
             }
 
             @Override
             public void onFinish() {
-                getView().countdownFinish();
+                if (getView() != null) getView().countdownFinish();
             }
         };
         timer.start();

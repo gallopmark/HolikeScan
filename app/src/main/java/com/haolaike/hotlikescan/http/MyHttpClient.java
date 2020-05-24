@@ -139,4 +139,12 @@ public class MyHttpClient {
         }
         postBody(url, header, params, callBack);
     }
+
+
+    /**
+     * 可设置超时时间请求
+     */
+    public static void postBodyByTimeout(String url, Map<String, String> header, String params, int timeout, RequestCallBack<?> callBack) {
+        HttpClient.getInstance().postBodyByTimeout(url, header, params, timeout, callBack);
+    }
 }

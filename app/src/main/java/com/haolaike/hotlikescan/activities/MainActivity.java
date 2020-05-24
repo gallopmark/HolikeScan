@@ -4,11 +4,11 @@ import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.haolaike.hotlikescan.R;
+import com.haolaike.hotlikescan.base.BaseActivity;
 import com.haolaike.hotlikescan.beans.MainMenuBean;
 import com.haolaike.hotlikescan.dialog.SimpleDialog;
 import com.haolaike.hotlikescan.presenter.MainPresenter;
@@ -25,7 +25,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class MainActivity extends com.haolaike.hotlikescan.base.BaseActivity<MainPresenter, MainView> implements MainView {
+public class MainActivity extends BaseActivity<MainPresenter, MainView> implements MainView {
 
     @BindView(R.id.tv_main_username)
     TextView tvUsername;
@@ -34,14 +34,13 @@ public class MainActivity extends com.haolaike.hotlikescan.base.BaseActivity<Mai
     @BindView(R.id.rv_main)
     RecyclerView rv;
 
-    private String[] names;
-    private int[] iconIds = {R.drawable.storage, R.drawable.release, R.drawable.bind_rack, R.drawable.app_info};
+    private int[] iconIds = {R.drawable.storage, R.drawable.storage, R.drawable.release, R.drawable.bind_rack, R.drawable.app_info};
     private List<MainMenuBean> beanList = new ArrayList<>();
 
     @Override
     protected void init() {
         if (mPresenter.isLogin()) {
-            names = getResources().getStringArray(R.array.main_item);
+            String[] names = getResources().getStringArray(R.array.main_item);
             tvUsername.setText(SharedPreferencesUtils.getString(Constants.USER, ""));
             rv.setLayoutManager(new GridLayoutManager(this, 2));
             rv.addItemDecoration(new DefaultItemDecoration(ContextCompat.getColor(this, R.color.bg_divider)));
@@ -74,27 +73,27 @@ public class MainActivity extends com.haolaike.hotlikescan.base.BaseActivity<Mai
         recyclerView.setAdapter(new CommonAdapter<MainMenuBean>(context, R.layout.item_rv_main_menu, list) {
             @Override
             protected void convert(ViewHolder holder, MainMenuBean bean, int position) {
-                TextView tvName = (TextView) holder.getView(R.id.tv_item_main_menu);
-                ImageView ivImg = (ImageView) holder.getView(R.id.iv_item_main_menu);
+                TextView tvName = holder.getView(R.id.tv_item_main_menu);
+                ImageView ivImg = holder.getView(R.id.iv_item_main_menu);
                 tvName.setText(bean.getName());
                 ivImg.setImageResource(bean.getIconId());
-                holder.getConvertView().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        switch (position) {
-                            case 0:
-                                startActivity(InScanActivity.class);
-                                break;
-                            case 1:
-                                startActivity(OutInfoActivity.class);
-                                break;
-                            case 2:
-                                startActivity(BindShelfActivity.class);
-                                break;
-                            case 3:
-                                startActivity(AppVersionActivity.class);
-                                break;
-                        }
+                holder.getConvertView().setOnClickListener(v -> {
+                    switch (position) {
+                        case 0:
+                            startActivity(InScan2Activity.class);
+                            break;
+                        case 1:
+                            startActivity(InScanActivity.class);
+                            break;
+                        case 2:
+                            startActivity(OutInfoActivity.class);
+                            break;
+                        case 3:
+                            startActivity(BindShelfActivity.class);
+                            break;
+                        case 4:
+                            startActivity(AppVersionActivity.class);
+                            break;
                     }
                 });
             }

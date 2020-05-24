@@ -1,10 +1,14 @@
 package com.haolaike.hotlikescan.beans;
 
+import android.support.annotation.Nullable;
+import android.text.TextUtils;
+
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Transient;
 
 import java.io.Serializable;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by Administrator on 2017/12/21 0021.
@@ -30,11 +34,14 @@ public class PartsBean implements Serializable {
     private boolean isScan;
     private int type;
     private long time;
+    
+    private String targetBztm;
 
-    @Generated(hash = 1193668282)
+    @Generated(hash = 1086776634)
     public PartsBean(Long _id, String bztm, String vbeln, String posnr, String bjbz,
-                     String packageNo, String orderNo, String rowNo, String soOrderNo,
-                     String chlidOrderNo, boolean isScan, int type, long time) {
+            String packageNo, String orderNo, String rowNo, String soOrderNo,
+            String chlidOrderNo, boolean isScan, int type, long time,
+            String targetBztm) {
         this._id = _id;
         this.bztm = bztm;
         this.vbeln = vbeln;
@@ -48,10 +55,30 @@ public class PartsBean implements Serializable {
         this.isScan = isScan;
         this.type = type;
         this.time = time;
+        this.targetBztm = targetBztm;
     }
 
     @Generated(hash = 1642527405)
     public PartsBean() {
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj == null) return false;
+        if (obj == this) return true;
+        if (obj instanceof PartsBean) {
+            return TextUtils.equals(bztm, ((PartsBean) obj).bztm);
+        } else {
+            return false;
+        }
+    }
+
+    public Long get_id() {
+        return this._id;
+    }
+
+    public void set_id(Long _id) {
+        this._id = _id;
     }
 
     public String getBztm() {
@@ -110,6 +137,22 @@ public class PartsBean implements Serializable {
         this.rowNo = rowNo;
     }
 
+    public String getSoOrderNo() {
+        return this.soOrderNo;
+    }
+
+    public void setSoOrderNo(String soOrderNo) {
+        this.soOrderNo = soOrderNo;
+    }
+
+    public String getChlidOrderNo() {
+        return this.chlidOrderNo;
+    }
+
+    public void setChlidOrderNo(String chlidOrderNo) {
+        this.chlidOrderNo = chlidOrderNo;
+    }
+
     public boolean getIsScan() {
         return this.isScan;
     }
@@ -126,14 +169,6 @@ public class PartsBean implements Serializable {
         this.type = type;
     }
 
-    public Long get_id() {
-        return this._id;
-    }
-
-    public void set_id(Long _id) {
-        this._id = _id;
-    }
-
     public long getTime() {
         return this.time;
     }
@@ -142,19 +177,11 @@ public class PartsBean implements Serializable {
         this.time = time;
     }
 
-    public String getSoOrderNo() {
-        return this.soOrderNo;
+    public String getTargetBztm() {
+        return this.targetBztm;
     }
 
-    public void setSoOrderNo(String soOrderNo) {
-        this.soOrderNo = soOrderNo;
-    }
-
-    public String getChlidOrderNo() {
-        return this.chlidOrderNo ;
-    }
-
-    public void setChlidOrderNo(String chlidOrderNo) {
-        this.chlidOrderNo = chlidOrderNo;
+    public void setTargetBztm(String targetBztm) {
+        this.targetBztm = targetBztm;
     }
 }

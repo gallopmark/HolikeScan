@@ -31,12 +31,12 @@ public class LoginPresenter extends BasePresenter<LoginView, LoginModel> {
                 SharedPreferencesUtils.saveString(Constants.USER, name);
                 SharedPreferencesUtils.saveString(Constants.TOKEN, UserBean.getToken());
                 SharedPreferencesUtils.saveLong(Constants.EXPIRATIONTIME, UserBean.getExpirationTime());
-                getView().loginSuccess();
+               if (getView() != null)getView().loginSuccess();
             }
 
             @Override
             public void failed(String result) {
-                getView().loginFailed(result);
+               if (getView() != null)getView().loginFailed(result);
             }
         });
     }
