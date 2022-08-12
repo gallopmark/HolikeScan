@@ -13,6 +13,7 @@ import com.haolaike.hotlikescan.beans.MainMenuBean;
 import com.haolaike.hotlikescan.dialog.SimpleDialog;
 import com.haolaike.hotlikescan.presenter.MainPresenter;
 import com.haolaike.hotlikescan.utils.Constants;
+import com.haolaike.hotlikescan.utils.DateUtils;
 import com.haolaike.hotlikescan.utils.SharedPreferencesUtils;
 import com.haolaike.hotlikescan.view.MainView;
 import com.yanzhenjie.recyclerview.swipe.widget.DefaultItemDecoration;
@@ -20,6 +21,7 @@ import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -34,8 +36,8 @@ public class MainActivity extends BaseActivity<MainPresenter, MainView> implemen
     @BindView(R.id.rv_main)
     RecyclerView rv;
 
-    private int[] iconIds = {R.drawable.storage, R.drawable.storage, R.drawable.release, R.drawable.bind_rack, R.drawable.app_info};
-    private List<MainMenuBean> beanList = new ArrayList<>();
+    private final int[] iconIds = {R.drawable.storage, R.drawable.storage, R.drawable.release, R.drawable.ic_onshelf_scanning, R.drawable.app_info, R.drawable.bind_rack};
+    private final List<MainMenuBean> beanList = new ArrayList<>();
 
     @Override
     protected void init() {
@@ -45,7 +47,7 @@ public class MainActivity extends BaseActivity<MainPresenter, MainView> implemen
             rv.setLayoutManager(new GridLayoutManager(this, 2));
             rv.addItemDecoration(new DefaultItemDecoration(ContextCompat.getColor(this, R.color.bg_divider)));
             for (int i = 0, size = names.length; i < size; i++) {
-                MainMenuBean bean = new MainMenuBean(names[i], iconIds[i]);
+                MainMenuBean bean = new MainMenuBean(i, names[i], iconIds[i]);
                 beanList.add(bean);
             }
             setList(this, rv, beanList);
@@ -75,10 +77,10 @@ public class MainActivity extends BaseActivity<MainPresenter, MainView> implemen
             protected void convert(ViewHolder holder, MainMenuBean bean, int position) {
                 TextView tvName = holder.getView(R.id.tv_item_main_menu);
                 ImageView ivImg = holder.getView(R.id.iv_item_main_menu);
-                tvName.setText(bean.getName());
-                ivImg.setImageResource(bean.getIconId());
+                tvName.setText(bean.name);
+                ivImg.setImageResource(bean.iconId);
                 holder.getConvertView().setOnClickListener(v -> {
-                    switch (position) {
+                    switch (bean.type) {
                         case 0:
                             startActivity(InScan2Activity.class);
                             break;
@@ -89,10 +91,13 @@ public class MainActivity extends BaseActivity<MainPresenter, MainView> implemen
                             startActivity(OutInfoActivity.class);
                             break;
                         case 3:
-                            startActivity(BindShelfActivity.class);
+                            startActivity(OnShelfScanActivity.class);
                             break;
                         case 4:
                             startActivity(AppVersionActivity.class);
+                            break;
+                        case 5:
+                            startActivity(BindShelfActivity.class);
                             break;
                     }
                 });

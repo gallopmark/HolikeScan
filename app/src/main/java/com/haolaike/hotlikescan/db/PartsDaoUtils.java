@@ -11,13 +11,12 @@ import java.util.List;
  */
 
 public class PartsDaoUtils {
-    private DaoManager mManager;
-    private PartsBeanDao dao;
+    private final PartsBeanDao dao;
 
     public PartsDaoUtils() {
-        mManager = DaoManager.getInstance();
-        mManager.init(MyApplication.getInstance());
-        dao = mManager.getDaoSession().getPartsBeanDao();
+        DaoManager manager = DaoManager.getInstance();
+        manager.init(MyApplication.getInstance());
+        dao = manager.getDaoSession().getPartsBeanDao();
     }
 
     public void insert(PartsBean bean) {

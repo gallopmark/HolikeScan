@@ -11,7 +11,7 @@ import java.util.List;
 
 public class LogDaoUtils {
 
-    private LogBeansDao mLogBeansDao;
+    private final LogBeansDao mLogBeansDao;
 
     public LogDaoUtils() {
         DaoManager mManager = DaoManager.getInstance();

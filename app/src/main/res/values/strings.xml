@@ -83,4 +83,30 @@
     <string name="hangup_tips">挂起提示</string>
     <string name="confirm">确定</string>
     <string name="select_date">选择日期：</string>
+
+    <string name="text_on_shelf_scan">上架扫描</string>
+
+    <string name="text_select_all">全选</string>
+    <string name="text_bind">绑定</string>
+    <string name="text_count_total">共%d大件</string>
+
+    <string name="text_crm_order_number">CRM订单号</string>
+    <string name="text_part_identification">部件标识</string>
+    <string name="text_production_sub_order">生产子订单</string>
+    <string name="text_sales_order_number">销售订单号</string>
+    <string name="text_packing_order">包装顺序</string>
+    <string name="text_packing_barcode">包装条码</string>
+
+    <string name="text_tips">温馨提示</string>
+    <string name="text_onshelf_scan_message">确定删除此条数据吗？</string>
+    <string name="text_bound_shelf">绑定货架</string>
+
+    <string name="tip_total_packages">总包数：%d</string>
+    <string name="tip_shelf_position">货架位：%s</string>
+    <string name="tip_listed_by">上架人：%s</string>
+    <string name="text_rescan">重新扫描</string>
+
+    <string name="text_barcode_exists">该包装条码已存在</string>
+    <string name="text_submit_error">无符合条件的数据</string>
+    <string name="tip_hide_data">此处隐藏了%d条</string>
 </resources>

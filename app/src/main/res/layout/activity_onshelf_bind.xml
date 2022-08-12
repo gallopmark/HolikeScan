@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_booting_top">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:background="@color/bg_booting_top"
+        android:gravity="center"
+        android:text="@string/text_bound_shelf"
+        android:textSize="@dimen/textSize_20" />
+
+    <TextView
+        android:id="@+id/tv_total"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_below="@+id/title"
+        android:background="@color/color_while"
+        android:gravity="center|start"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:text="@string/tip_total_packages"
+        android:textColor="@color/textColor4"
+        android:textSize="@dimen/textSize_13" />
+
+    <TextView
+        android:id="@+id/tv_shelf_position"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_below="@+id/tv_total"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/color_while"
+        android:gravity="center|start"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:text="@string/tip_shelf_position"
+        android:textColor="@color/textColor4"
+        android:textSize="@dimen/textSize_13" />
+
+    <TextView
+        android:id="@+id/tv_listed_by"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_below="@+id/tv_shelf_position"
+        android:background="@color/color_while"
+        android:gravity="center|start"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:text="@string/tip_listed_by"
+        android:textColor="@color/textColor4"
+        android:textSize="@dimen/textSize_13" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_while"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/tv_rescan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:background="@drawable/bg_btn_red"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_20"
+            android:paddingBottom="@dimen/dp_10"
+            android:text="@string/text_rescan"
+            android:textColor="@color/color_while"
+            android:textSize="@dimen/textSize_14" />
+
+        <TextView
+            android:id="@+id/tv_binding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center"
+            android:background="@drawable/bg_btn_red"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_20"
+            android:paddingBottom="@dimen/dp_10"
+            android:text="@string/text_bind"
+            android:textColor="@color/color_while"
+            android:textSize="@dimen/textSize_14" />
+    </FrameLayout>
+</RelativeLayout>

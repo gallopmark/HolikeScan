@@ -1,5 +1,6 @@
 package com.haolaike.hotlikescan.utils;
 
+
 /**
  * Created by wqj on 2017/11/23.
  * 常量类
@@ -18,4 +19,7 @@ public class Constants {
     /*广播行为*/
     public static final String SCANACTION = "com.android.server.scannerservice.broadcast";
     public static final String SCANNERDATA = "scannerdata";
+
+    public static final String PDA_ACTION = "android.intent.ACTION_DECODE_DATA";
+    public static final String PDA_DATA = "barcode_string";
 }

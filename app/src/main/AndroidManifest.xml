@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -39,14 +39,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.InScanActivity" />
-        <activity android:name=".activities.InScan2Activity"/>
+        <activity android:name=".activities.InScan2Activity" />
         <activity android:name=".activities.OutScanActivity" />
         <activity android:name=".activities.OutActivity" />
         <activity android:name=".activities.OutInfoActivity" />
         <activity android:name=".activities.DisInActivity" />
-        <activity android:name=".activities.DisOutActivity"/>
+        <activity android:name=".activities.DisOutActivity" />
         <activity android:name=".activities.AppVersionActivity" />
         <activity android:name=".activities.BindShelfActivity" />
+        <activity android:name=".activities.OnShelfScanActivity" />
+        <activity android:name=".activities.OnShelfBindActivity" />
     </application>
 
 </manifest>

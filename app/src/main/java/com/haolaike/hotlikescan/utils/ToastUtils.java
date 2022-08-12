@@ -30,10 +30,9 @@ public class ToastUtils {
 
     /**
      * 显示Toast
-     *
-     * @param message
      */
     public static void showToast(String message) {
+        if (TextUtils.isEmpty(message)) return;
         if (toast == null) {
             toast = Toast.makeText(MyApplication.getInstance(), message, Toast.LENGTH_SHORT);
             toast.show();

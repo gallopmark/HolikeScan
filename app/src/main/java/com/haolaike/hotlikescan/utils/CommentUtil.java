@@ -65,8 +65,7 @@ public class CommentUtil {
     public static boolean MatchString(String patternStr , String content){
         Pattern pattern = Pattern.compile(patternStr);
         Matcher matcher = pattern.matcher(content);
-        boolean b= matcher.matches();
-        return b;
+        return matcher.matches();
     }
 
 }

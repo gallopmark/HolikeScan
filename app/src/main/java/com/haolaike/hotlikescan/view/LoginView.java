@@ -8,7 +8,12 @@ import com.haolaike.hotlikescan.base.BaseView;
  */
 
 public interface LoginView extends BaseView {
+    void onShowLoading();
+
+    void onDismissLoading();
+
     void loginSuccess();
 
     void loginFailed(String failed);
+
 }

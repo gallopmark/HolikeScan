@@ -1,11 +1,16 @@
 package com.haolaike.hotlikescan.presenter;
 
+import android.support.annotation.NonNull;
+
 import com.haolaike.hotlikescan.base.BasePresenter;
 import com.haolaike.hotlikescan.beans.UserBean;
+import com.haolaike.hotlikescan.http.RequestCallBack;
 import com.haolaike.hotlikescan.model.LoginModel;
 import com.haolaike.hotlikescan.utils.Constants;
 import com.haolaike.hotlikescan.utils.SharedPreferencesUtils;
 import com.haolaike.hotlikescan.view.LoginView;
+
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by holike on 2017/12/21.
@@ -20,23 +25,33 @@ public class LoginPresenter extends BasePresenter<LoginView, LoginModel> {
 
     /**
      * 登录
-     *
-     * @param name
-     * @param password
      */
     public void login(String name, String password) {
-        model.login(name, password, new LoginModel.LoginLintener() {
+        model.login(name, password, new RequestCallBack<UserBean>() {
             @Override
-            public void success(UserBean UserBean) {
-                SharedPreferencesUtils.saveString(Constants.USER, name);
-                SharedPreferencesUtils.saveString(Constants.TOKEN, UserBean.getToken());
-                SharedPreferencesUtils.saveLong(Constants.EXPIRATIONTIME, UserBean.getExpirationTime());
-               if (getView() != null)getView().loginSuccess();
+            public void onSubscribe(@NonNull Disposable d) {
+                if (getView() != null) {
+                    getView().onShowLoading();
+                }
             }
 
             @Override
-            public void failed(String result) {
-               if (getView() != null)getView().loginFailed(result);
+            public void onFailed(String result) {
+                if (getView() != null) {
+                    getView().onDismissLoading();
+                    getView().loginFailed(result);
+                }
+            }
+
+            @Override
+            public void onSuccess(UserBean bean) {
+                SharedPreferencesUtils.saveString(Constants.USER, name);
+                SharedPreferencesUtils.saveString(Constants.TOKEN, bean.getToken());
+                SharedPreferencesUtils.saveLong(Constants.EXPIRATIONTIME, bean.getExpirationTime());
+                if (getView() != null) {
+                    getView().onDismissLoading();
+                    getView().loginSuccess();
+                }
             }
         });
     }

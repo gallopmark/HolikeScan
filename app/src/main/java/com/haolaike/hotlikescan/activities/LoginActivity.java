@@ -1,6 +1,7 @@
 package com.haolaike.hotlikescan.activities;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 import com.haolaike.hotlikescan.R;
 import com.haolaike.hotlikescan.base.BaseActivity;
 import com.haolaike.hotlikescan.presenter.LoginPresenter;
+import com.haolaike.hotlikescan.utils.ToastUtils;
 import com.haolaike.hotlikescan.view.LoginView;
 
 import butterknife.BindView;
@@ -26,6 +28,16 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginView> imple
     @BindView(R.id.btn_login_login)
     TextView btnLogin;
 
+    @Override
+    public void onShowLoading() {
+        showLoading();
+    }
+
+    @Override
+    public void onDismissLoading() {
+        dismissLoading();
+    }
+
     /**
      * 登录成功
      */
@@ -38,8 +50,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginView> imple
 
     /**
      * 登录失败
-     *
-     * @param failed
      */
     @Override
     public void loginFailed(String failed) {
@@ -64,6 +74,16 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginView> imple
 
     @OnClick(R.id.btn_login_login)
     public void onViewClicked() {
-        mPresenter.login(etName.getText().toString(), etPassword.getText().toString());
+        String name = etName.getText().toString();
+        if (TextUtils.isEmpty(name)) {
+            ToastUtils.showToast("请输入帐号");
+        } else {
+            String password = etPassword.getText().toString();
+            if (TextUtils.isEmpty(password)) {
+                ToastUtils.showToast("请输入密码");
+            } else {
+                mPresenter.login(name, password);
+            }
+        }
     }
 }

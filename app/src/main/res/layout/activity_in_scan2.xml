@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:singleLine="true"
+            android:gravity="center|start"
             android:background="@null"
             android:imeOptions="actionDone"
             android:textColor="@color/textColor5"

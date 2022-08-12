@@ -7,10 +7,10 @@ import com.haolaike.hotlikescan.BuildConfig;
  */
 
 public class UrlPath {
-//        private static String HOST = "http://120.79.76.243";
+    //        private static String HOST = "http://120.79.76.243";
 //    private static String HOST = "http://172.16.111.48:8081";
 //    private static String HOST = "http://c.holike.com";
-    private static String HOST = BuildConfig.API_HOST;
+    private static final String HOST = BuildConfig.API_HOST;
 
     //登录接口
     public static final String URL_LOGIN = HOST + "/warehouse/api/appuser";
@@ -34,4 +34,10 @@ public class UrlPath {
     public static final String URL_CHECK_VERSION = HOST + "/warehouse/api/appversion";
 
     public static final String URL_TEMP = BuildConfig.API_TEMP + "/data/code";
+
+    //上架扫描
+    public static final String URL_ONSHELF_SCAN = BuildConfig.API_CRM + "/warehouse/api/ZMM_SJ_GET_CRM";
+
+    //绑定货架
+    public static final String URL_ONSHELF_BIND = BuildConfig.API_CRM + "/warehouse/api/ZMM_SJ_POST_CRM";
 }

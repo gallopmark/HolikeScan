@@ -39,6 +39,7 @@ public abstract class RequestCallBack<T> implements Observer<String> {
 
     @Override
     public void onError(@NonNull Throwable e) {
+        LogCat.e(e);
         onFailed(ApiException.handleException(e).getMessage());
     }
 
@@ -47,40 +48,37 @@ public abstract class RequestCallBack<T> implements Observer<String> {
         LogCat.i_response(s);
         try {
             JSONObject json = new JSONObject(s);
-            switch (json.getInt("code")) {
-                case 0:
+            if (json.getInt("code") == 0) {
+                if (json.has("data")) {
+                    String result = json.optString("data");
+                    Type genType = getClass().getGenericSuperclass();
+                    Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
+                    T t = new Gson().fromJson(result, params[0]);
+                    onSuccess(t);
+                } else {
+                    onSuccess((T) s);
+                }
+            } else {
+                String reason = null;
+                try {
                     if (json.has("data")) {
-                        String result = json.optString("data");
-                        Type genType = getClass().getGenericSuperclass();
-                        Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
-                        T t = new Gson().fromJson(result, params[0]);
-                        onSuccess(t);
-                    } else {
-                        onSuccess((T) s);
-                    }
-                    break;
-                default:
-                    String reason = null;
-                    try {
-                        if (json.has("data")) {
-                            JSONObject dataObject = json.getJSONObject("data");
-                            if (dataObject.has("emessage")) {
-                                reason = dataObject.optString("emessage");
-                            }
+                        JSONObject dataObject = json.getJSONObject("data");
+                        if (dataObject.has("emessage")) {
+                            reason = dataObject.optString("emessage");
                         }
+                    }
+                } catch (Exception ignored) {
+                }
+                if (TextUtils.isEmpty(reason)) {
+                    try {
+                        reason = json.optString("reason");
                     } catch (Exception ignored) {
                     }
-                    if (TextUtils.isEmpty(reason)) {
-                        try {
-                            reason = json.optString("reason");
-                        } catch (Exception ignored) {
-                        }
-                    }
-                    if (!TextUtils.isEmpty(reason)) {
-                        onFailed(reason);
-                    } else
-                        onFailed(s);
-                    break;
+                }
+                if (!TextUtils.isEmpty(reason)) {
+                    onFailed(reason);
+                } else
+                    onFailed(s);
             }
         } catch (Exception e) {
             onFailed(ApiException.handleException(e).getMessage());

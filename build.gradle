@@ -3,24 +3,26 @@
 buildscript {
     repositories {
         google() // add repository
-        maven { url 'https://maven.google.com' }
+//        maven { url 'https://maven.google.com' }
         jcenter()
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
-
+        classpath 'com.android.tools.build:gradle:4.1.2'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
-        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2' // add plugin
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.3.0' // add plugin
     }
 }
 
 allprojects {
     repositories {
         google() // add repository
-        maven { url 'https://maven.google.com' }
+//        maven { url 'https://maven.google.com' }
         jcenter()
+        maven {
+            url "http://maven.aliyun.com/nexus/content/repositories/releases"
+        }
         maven { url 'https://www.jitpack.io' }
     }
 }

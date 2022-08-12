@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/HolikeScan.iml" filepath="$PROJECT_DIR$/HolikeScan.iml" group="HolikeScan" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="HolikeScan/app" />
+      <module fileurl="file://$PROJECT_DIR$/HolikeScan.iml" filepath="$PROJECT_DIR$/HolikeScan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/HolikeScan.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/HolikeScan.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/HolikeScan.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/HolikeScan.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/HolikeScan.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/HolikeScan.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/HolikeScan.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/HolikeScan.app.unitTest.iml" />
     </modules>
   </component>
 </project>

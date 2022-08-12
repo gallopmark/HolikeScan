@@ -11,7 +11,8 @@
         <item>萝岗特殊入库扫描</item>
         <item>入库扫描</item>
         <item>出库扫描</item>
-        <item>指定货架</item>
+        <item>上架扫描</item>
         <item>APP信息</item>
+        <item>指定货架</item>
     </string-array>
 </resources>

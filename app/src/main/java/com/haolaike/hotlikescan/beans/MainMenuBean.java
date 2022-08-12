@@ -7,27 +7,13 @@ import java.io.Serializable;
  * 首页菜单bean
  */
 
-public class MainMenuBean implements Serializable {
-    private String name;
-    private int iconId;
+public class MainMenuBean {
+    public int type;
+    public String name;
+    public int iconId;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getIconId() {
-        return iconId;
-    }
-
-    public void setIconId(int iconId) {
-        this.iconId = iconId;
-    }
-
-    public MainMenuBean(String name, int iconId) {
+    public MainMenuBean(int type, String name, int iconId) {
+        this.type = type;
         this.name = name;
         this.iconId = iconId;
     }

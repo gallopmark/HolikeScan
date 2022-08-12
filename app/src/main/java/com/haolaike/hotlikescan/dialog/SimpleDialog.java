@@ -34,22 +34,16 @@ public class SimpleDialog extends BaseDialog {
         tvContent = (TextView) mContentView.findViewById(R.id.tv_dialog_simple_content);
         btnLeft = (TextView) mContentView.findViewById(R.id.btn_dialog_simple_left);
         btnRight = (TextView) mContentView.findViewById(R.id.btn_dialog_simple_right);
-        btnLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-                if (listener != null) {
-                    listener.left();
-                }
+        btnLeft.setOnClickListener(v -> {
+            dismiss();
+            if (listener != null) {
+                listener.left();
             }
         });
-        btnRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-                if (listener != null) {
-                    listener.right();
-                }
+        btnRight.setOnClickListener(v -> {
+            dismiss();
+            if (listener != null) {
+                listener.right();
             }
         });
     }

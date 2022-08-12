@@ -24,9 +24,9 @@ public class HttpClient {
     public static final String BASE_URL = BuildConfig.API_HOST;
     private static final int DEFAULT_TIMEOUT = 60;
 
-    private OkHttpClient httpClient;
-    private Retrofit retrofit;
-    private List<RequestCallBack> callBacks;
+    private final OkHttpClient httpClient;
+    private final Retrofit retrofit;
+    private final List<RequestCallBack> callBacks;
     private RequestCallBack currentCallBack;
 
     //构造方法私有

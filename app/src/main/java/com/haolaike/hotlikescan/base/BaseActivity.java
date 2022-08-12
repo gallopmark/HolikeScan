@@ -6,14 +6,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -105,9 +103,10 @@ public abstract class BaseActivity<T extends BasePresenter, V extends BaseView> 
      * 注册扫描监听
      */
     protected void register() {
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(Constants.SCANACTION);
-        registerReceiver(scanReceiver, intentFilter);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constants.SCANACTION);
+        filter.addAction(Constants.PDA_ACTION);
+        registerReceiver(scanReceiver, filter);
     }
 
     /**
@@ -117,12 +116,19 @@ public abstract class BaseActivity<T extends BasePresenter, V extends BaseView> 
         unregisterReceiver(scanReceiver);
     }
 
-    private BroadcastReceiver scanReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver scanReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (TextUtils.equals(intent.getAction(), Constants.SCANACTION)) {
-                String mCode = intent.getStringExtra(Constants.SCANNERDATA);
-                handler.postDelayed(() -> scanData(mCode.trim()), 1);
+            final String code;
+            if (Constants.SCANACTION.equals(intent.getAction())) {
+                code = intent.getStringExtra(Constants.SCANNERDATA);
+            } else if (Constants.PDA_DATA.equals(intent.getAction())) {
+                code = intent.getStringExtra(Constants.PDA_DATA);
+            } else {
+                code = "";
+            }
+            if (!TextUtils.isEmpty(code)) {
+                handler.postDelayed(() -> scanData(code.trim()), 1);
             }
         }
     };
@@ -159,6 +165,10 @@ public abstract class BaseActivity<T extends BasePresenter, V extends BaseView> 
     protected void hideSoftInput(View view) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    protected void showLoading() {
+        showLoading(null);
     }
 
     protected void showLoading(String text) {
